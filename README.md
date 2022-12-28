@@ -17,3 +17,4 @@ localhost:3000/api/upload?file=img_5544.jpg&width=350&height=350
 
 # Other functionalities:
 A user can upload a file via the landing page and enter desired width and height
+<img width="1674" alt="image_resizer" src="https://user-images.githubusercontent.com/20965921/209806948-e21151e5-7f3c-4d63-a211-4de82b7f5939.png">
