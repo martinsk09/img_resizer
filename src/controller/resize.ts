@@ -1,6 +1,6 @@
-const sharp = require("sharp");
+const sharp = require('sharp');
 const path = require('path');
-const fs = require('fs').promises;
+const fs = require('fs');
 
 let fileExists:boolean;
 exports.image_resize = (req: { query: { file: String; width: string; height: string; };baseUrl:string; }, res: { send: (arg0: string) => void; }) => {
@@ -10,8 +10,7 @@ exports.image_resize = (req: { query: { file: String; width: string; height: str
 
     /*const readFile = fs.createReadStream('./assets/images/full/'+req.query.file);
     let imageFileBuffer = fs.readFileSync('./assets/images/full/'+req.query.file);*/
-   checkFileExists(req.query.file);
-    if(fileExists){
+    if(fs.existsSync(path.join(__dirname, '../../assets/images/full/'+req.query.file))){
 
         res.send('File already exists, redirecting to existing thumb');
     }else{
@@ -21,11 +20,7 @@ exports.image_resize = (req: { query: { file: String; width: string; height: str
     //imageResize('../../assets/images/full/'+req.query.file,width,height);
     res.send('Image Process response ');
   };
-  
-  function checkFileExists(file:String){
-    //check directory
-    return fileExists;
-  }
+
  async function imageResize(file:String ,width:number,height:number) {
     const readStream = fs.createReadStream(file)
   let transform = sharp();

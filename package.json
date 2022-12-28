@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
+    "test:lint": "eslint . && prettier --check .",
+    "build": "npx tsc",
     "jasmine": "jasmine",
     "start": "nodemon src/index.ts"
   },
@@ -27,21 +29,19 @@
     "fs": "^0.0.1-security",
     "jasmine": "^4.5.0",
     "jasmine-spec-reporter": "^7.0.0",
+    "pug": "^3.0.2",
     "sharp": "^0.31.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.15",
     "@types/jasmine": "^4.3.1",
     "@types/node": "^18.11.18",
-<<<<<<< HEAD
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
     "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.5.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.1",
-=======
-    "nodemon": "^2.0.20",
->>>>>>> abad3efa74fdbf49e941fb8d554b85bb6814ac3a
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   }
