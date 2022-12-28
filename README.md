@@ -15,9 +15,10 @@ The script needed to start: npm run start
 
 localhost:3000 - landing page
 
-localhost:3000/api/upload?file=img_5544.jpg&width=350&height=350
+http://localhost:3000/api/resize?file=IMG_53073.jpg&width=400&height=400 File does not exist
 
-View a thumb as seen on the img src attribute http://localhost:3000/api/images?filename=IMG_5281-resized-compressed.jpeg&width=350&height=350
+
+http://localhost:3000/api/resize?file=IMG_5192.jpg&width=400&height=400 File exists
 
 # Other functionalities:
 A user can upload a file via the landing page and enter desired width and height
