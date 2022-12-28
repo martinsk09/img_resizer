@@ -21,14 +21,13 @@ var storage = multer.diskStorage({
             res.redirect("/api/resize?file=".concat(file.originalname, "&width=350&height=350"));
         }
         else if (file.mimetype === 'image/jpg' ||
-            file.mimetype === "image/jpeg" ||
+            file.mimetype === 'image/jpeg' ||
             file.mimetype === 'immage/png') {
             cb(null, true);
         }
         else
-            (console.log('Not expected file format')
-            //cb(null, new Error('Only jpg,jpeg,png file allowed.'))
-            );
+            console.log('Not expected file format');
+        //cb(null, new Error('Only jpg,jpeg,png file allowed.'))
     }
 });
 var upload1 = multer({ storage: storage });
@@ -40,6 +39,6 @@ upload.get('/', function (req, res) {
 upload.post('/', upload1.single('uploadImage'), function (req, res, next) {
     res.redirect("/api/resize?file=".concat(req.file.originalname, "&width=").concat(req.body.width, "&height=").concat(req.body.height));
     /*console.log(req.file);
-      console.log('ree' +JSON.stringify(req.body.height));*/
+    console.log('ree' +JSON.stringify(req.body.height));*/
 });
 exports.default = upload;

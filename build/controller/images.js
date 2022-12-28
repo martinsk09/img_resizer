@@ -19,7 +19,7 @@ exports.displayThumb = function (req, res) {
         files.forEach(function (image) {
             // Do whatever you want to do with the file
             if (image.startsWith(imageName)) {
-                //console.log('Found2 ' +image); 
+                //console.log('Found2 ' +image);
                 res.sendFile(path_1.default.join(__dirname, '../../assets/images/thumb/' + image));
             }
         });

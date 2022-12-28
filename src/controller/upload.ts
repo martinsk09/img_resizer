@@ -1,10 +1,10 @@
 //const formidable = require('formidable');
-const multer  = require('multer')
-const upload1 = multer({ dest: './public/data/uploads/' })
+const multer = require('multer');
+const upload1 = multer({ dest: './public/data/uploads/' });
 
-exports.uploadImage = ( req:any, res: {redirect: (arg0: String)  => void; }) => {
-    upload1.single('uploadImage');
-    /*const form = formidable({ multiples: true });
+exports.uploadImage = (req: any, res: { redirect: (arg0: String) => void }) => {
+  upload1.single('uploadImage');
+  /*const form = formidable({ multiples: true });
     form.parse(req, (err:String, fields:String, files:any) => {
     if (err) {
       next(err);
@@ -13,6 +13,6 @@ exports.uploadImage = ( req:any, res: {redirect: (arg0: String)  => void; }) => 
     }
     res.json({ fields, files });
   });*/
-console.log('req '+req.body);
-//res.redirect('');
-}
+  console.log('req ' + req.body);
+  //res.redirect('');
+};

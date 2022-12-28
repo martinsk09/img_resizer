@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = __importDefault(require("path"));
 exports.index = function (req, res) {
     /* pug.renderFile('../view/index.pug', {
-         name: 'Timothy'
-       });*/
+          name: 'Timothy'
+        });*/
     //res.sendFile('Main Route');
     res.sendFile(path_1.default.join(__dirname, '../view/index.html'));
 };

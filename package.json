@@ -6,7 +6,9 @@
   "scripts": {
     "test:lint": "eslint . && prettier --check .",
     "build": "npx tsc",
+    "fix:lint": "eslint --fix",
     "jasmine": "jasmine",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "test": "npm run build && npm run jasmine",
     "start": "nodemon src/index.ts"
   },
@@ -25,12 +27,8 @@
   },
   "homepage": "https://github.com/martinsk09/img_resizer#readme",
   "dependencies": {
-    "body-parser": "^1.20.1",
     "express": "^4.18.2",
     "formidable": "^2.1.1",
-    "fs": "^0.0.1-security",
-    "jasmine": "^4.5.0",
-    "jasmine-spec-reporter": "^7.0.0",
     "multer": "^1.4.5-lts.1",
     "sharp": "^0.31.3",
     "supertest": "^6.3.3"
@@ -38,6 +36,10 @@
   "devDependencies": {
     "@types/express": "^4.17.15",
     "@types/jasmine": "^4.3.1",
+    "body-parser": "^1.20.1",
+    "jasmine": "^4.5.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "fs": "^0.0.1-security",
     "@types/node": "^18.11.18",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
