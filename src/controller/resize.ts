@@ -2,17 +2,27 @@ const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs');
 
-exports.image_resize = (req: { query: { file: String; width: string; height: string; };baseUrl:string; }, res: { send: (arg0: string) => void; }) => {
+exports.image_resize = (req: { query: { file: String; width: string; height: string; };baseUrl:string; }, res: { send: (arg0: string) => void; redirect:(x:string)=>void;}) => {
 
-    let width = parseInt(req.query.width) || 200; 
-    let height = parseInt(req.query.height) || 200; 
+  let width:number;
+  let height:number;
+  if(req.query.width == undefined || req.query.width == null){
+     width = 200; 
+  }else{
+     width = parseInt(req.query.width); 
+  }
+  if(req.query.height == undefined || req.query.height == null){
+     height = 200; 
+  }else{
+     height = parseInt(req.query.height); 
+  }
     const imageFullName = req.query.file;
     let imageName = imageFullName.slice(0,-4);
 
 
     /*const readFile = fs.createReadStream('./assets/images/full/'+req.query.file);
     let imageFileBuffer = fs.readFileSync('./assets/images/full/'+req.query.file);*/
-    if(fs.existsSync(path.join(__dirname, '../../assets/images/full/'+req.query.file))){
+    /*if(fs.existsSync(path.join(__dirname, '../../assets/images/full/'+req.query.file))){*/
 
       const directoryPath = path.join(__dirname, '../../assets/images/thumb/');
       //passsing directoryPath and callback function
@@ -70,14 +80,16 @@ exports.image_resize = (req: { query: { file: String; width: string; height: str
                   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
                 </body>
               </html>`);
-              }
+              }else{
+                resizeImage(path.join(__dirname, '../../assets/images/full/'+req.query.file),req.query.file,width,height);
+
+                // res.redirect(`/api/resize?file=${req.query.file}&width=${width}&height=${height}`)
+        
+            }
               //console.log(image); 
           });
       });
-    }else{
-        resizeImage(path.join(__dirname, '../../assets/images/full/'+req.query.file),req.query.file,width,height);
-
-    }
+    
     //imageResize('../../assets/images/full/'+req.query.file,width,height);
    // res.send('Image Process response ');
   };
@@ -95,6 +107,8 @@ exports.image_resize = (req: { query: { file: String; width: string; height: str
   return readStream.pipe(transform)
   
  }
+
+ //This is used to process the image
 async function resizeImage(fileAd:string, file:String,width:number,height:number) {
   try {
     await sharp(fileAd)

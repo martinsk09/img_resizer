@@ -2,7 +2,7 @@
 import path from 'path';
 const fs = require('fs');
 
-exports.displayThumb = (req: { query: { filename: String; width: string; height: string; };baseUrl:string; }, res: { sendFile: (arg0: string, x:{}) => void; }) => {
+exports.displayThumb = (req: { query: { filename: String; width: string; height: string; };baseUrl:string; }, res: { sendFile: (arg0: string) => void; }) => {
 
     const imageFullName = req.query.filename;
     let imageName = imageFullName.slice(0,-5);
@@ -20,14 +20,8 @@ exports.displayThumb = (req: { query: { filename: String; width: string; height:
           files.forEach(function (image:String) {
               // Do whatever you want to do with the file
               if(image.startsWith(imageName)){ 
-                console.log('Found2 ' +image); 
-              res.sendFile(path.join(__dirname, '../../assets/images/thumb/'+imageFullName),function (err:String) {
-                if (err) {
-                  console.log('Show '+err);
-                } else {
-                  console.log('Sent: ' +req.query.filename);
-                }
-              });
+                //console.log('Found2 ' +image); 
+              res.sendFile(path.join(__dirname, '../../assets/images/thumb/'+imageFullName));
               }
           });
       });

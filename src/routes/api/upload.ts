@@ -41,6 +41,6 @@ upload.post('/', upload1.single('uploadImage'), function (req:any, res:any, next
   res.redirect(`/api/resize?file=${req.file.originalname}&width=${req.body.width}&height=${req.body.height}`);
   
   console.log(req.file); 
-    console.log('ree' +JSON.stringify(req.body));
+    console.log('ree' +JSON.stringify(req.body.height));
   })
 export default upload;
