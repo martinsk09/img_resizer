@@ -73,7 +73,7 @@ exports.image_resize = (req: { query: { file: String; width: string; height: str
               <main class="container">
                   <div class="bg-light p-5 mt-5 rounded">
                   <h1>Image Exists!</h1>
-                    <img src="images?filename=${image}&width=${width}&height=${height}" />
+                    <img src="images?filename=${imageName}&width=${width}&height=${height}" />
                   </div>
                 </main>
               
@@ -121,7 +121,7 @@ async function resizeImage(fileAd:string, file:String,width:number,height:number
       .toFormat("jpeg", { mozjpeg: true })
       .toFile(path.join(__dirname, '../../assets/images/thumb/'+file.slice(0, -4)+"-resized-compressed.jpeg"));
       //.toFile(path.join(__dirname, '../../assets/images/thumb/'+file.slice(0, -4)+"-resized-compressed.jpeg"));
-      console.log('File '+file);
+      console.log('File2 '+file);
   } catch (error) {
 
     console.log('File '+JSON.stringify(file));

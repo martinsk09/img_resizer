@@ -2,10 +2,10 @@
 import path from 'path';
 const fs = require('fs');
 
-exports.displayThumb = (req: { query: { filename: String; width: string; height: string; };baseUrl:string; }, res: { sendFile: (arg0: string) => void; }) => {
+exports.displayThumb = (req: { query: { filename: string; };baseUrl:string; }, res: { sendFile: (arg0: string) => void; }) => {
 
     const imageFullName = req.query.filename;
-    let imageName = imageFullName.slice(0,-5);
+    let imageName = imageFullName;
 
 
 
@@ -21,7 +21,7 @@ exports.displayThumb = (req: { query: { filename: String; width: string; height:
               // Do whatever you want to do with the file
               if(image.startsWith(imageName)){ 
                 //console.log('Found2 ' +image); 
-              res.sendFile(path.join(__dirname, '../../assets/images/thumb/'+imageFullName));
+              res.sendFile(path.join(__dirname, '../../assets/images/thumb/'+image));
               }
           });
       });
