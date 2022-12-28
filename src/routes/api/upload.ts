@@ -1,6 +1,7 @@
 import express from 'express';
 const path = require('path');
 const fs = require('fs');
+import resize from './resize';
 const uploadImage = require( '../../controller/upload');
 
 const multer  = require('multer')
@@ -40,7 +41,7 @@ upload.get('/', (req, res) => {
 upload.post('/', upload1.single('uploadImage'), function (req:any, res:any, next) {
   res.redirect(`/api/resize?file=${req.file.originalname}&width=${req.body.width}&height=${req.body.height}`);
   
-  console.log(req.file); 
-    console.log('ree' +JSON.stringify(req.body.height));
+  /*console.log(req.file); 
+    console.log('ree' +JSON.stringify(req.body.height));*/
   })
 export default upload;

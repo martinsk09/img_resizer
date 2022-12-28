@@ -39,7 +39,7 @@ upload.get('/', function (req, res) {
 // upload.post('/',uploadImage.uploadImage);
 upload.post('/', upload1.single('uploadImage'), function (req, res, next) {
     res.redirect("/api/resize?file=".concat(req.file.originalname, "&width=").concat(req.body.width, "&height=").concat(req.body.height));
-    console.log(req.file);
-    console.log('ree' + JSON.stringify(req.body.height));
+    /*console.log(req.file);
+      console.log('ree' +JSON.stringify(req.body.height));*/
 });
 exports.default = upload;
