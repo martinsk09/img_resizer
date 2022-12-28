@@ -4,7 +4,7 @@
   "description": "An app to enable users resize images from the endpoint",
   "main": "index.js",
   "scripts": {
-    "test:lint": "eslint . && prettier --check .",
+    "test:lint": "eslint --ext .ts && prettier --check 'src/**/*.ts'",
     "build": "npx tsc",
     "fix:lint": "eslint --fix",
     "jasmine": "jasmine",
