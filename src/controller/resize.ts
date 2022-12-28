@@ -4,8 +4,8 @@ const fs = require('fs');
 
 exports.image_resize = (req: { query: { file: String; width: string; height: string; };baseUrl:string; }, res: { send: (arg0: string) => void; }) => {
 
-    let width = parseInt(req.query.width); 
-    let height = parseInt(req.query.height); 
+    let width = parseInt(req.query.width) || 200; 
+    let height = parseInt(req.query.height) || 200; 
     const imageFullName = req.query.file;
     let imageName = imageFullName.slice(0,-4);
 
