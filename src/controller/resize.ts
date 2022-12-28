@@ -2,7 +2,6 @@ const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs');
 
-let fileExists:boolean;
 exports.image_resize = (req: { query: { file: String; width: string; height: string; };baseUrl:string; }, res: { send: (arg0: string) => void; }) => {
 
     let width = parseInt(req.query.width); 

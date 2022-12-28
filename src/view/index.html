@@ -10,7 +10,7 @@
      
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Image Resizer</a>
+      <a class="navbar-brand" href="/">Image Resizer</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -34,17 +34,21 @@
     <h1>Upload Image!</h1>
       <p class="lead">This app automatically sets the resolution of an image.</p>
     
-      <form class="row g-3">
+      <form class="row g-3" enctype="multipart/form-data" action="/api/upload/" method="post">
         <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">Width</label>
-          <input type="text" placeholder="200" class="form-control" id="inputEmail4">
+          <label for="width" class="form-label">Width (PX)</label>
+          <input type="number" placeholder="200" name="width" min="5" max="800" value="200" class="form-control" id="width">
         </div>
         <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">Height</label>
-          <input type="text" class="form-control" placeholder="200" id="inputPassword4">
+          <label for="height" class="form-label">Height (PX)</label>
+          <input type="number" class="form-control" name="height" min="5" max="800" value="200" placeholder="200" id="height">
         </div>
+        <div>
+            <label for="uploadImage" class="form-label">Select image to process</label>
+            <input class="form-control form-control-lg" name="uploadImage" id="uploadImage" type="file">
+          </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-primary">Upload & Resize</button>
+          <input type="submit" class="btn btn-primary" value="Upload & Resize"/>
         </div>
         </form>
     </div>
