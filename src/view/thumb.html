@@ -17,10 +17,10 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link " aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Thumbs</a>
+            <a class="nav-link active" href="#">Thumbs</a>
           </li>
         </ul>
         
@@ -31,26 +31,8 @@
 
 <main class="container">
     <div class="bg-light p-5 mt-5 rounded">
-    <h1>Upload Image!</h1>
-      <p class="lead">This app automatically sets the resolution of an image.</p>
-    
-      <form class="row g-3" enctype="multipart/form-data" action="/api/upload" method="post">
-        <div class="col-md-6">
-          <label for="width" class="form-label">Width (PX)</label>
-          <input type="number" placeholder="200" name="width" min="5" max="800" value="200" class="form-control" id="width">
-        </div>
-        <div class="col-md-6">
-          <label for="height" class="form-label">Height (PX)</label>
-          <input type="number" class="form-control" name="height" min="5" max="800" value="200" placeholder="200" id="height">
-        </div>
-        <div>
-            <label for="uploadImage" class="form-label">Select image to process</label>
-            <input class="form-control form-control-lg" name="uploadImage" id="uploadImage" type="file">
-          </div>
-        <div class="col-12">
-          <input type="submit" class="btn btn-primary" value="Upload & Resize"/>
-        </div>
-        </form>
+    <h1>Image Exists!</h1>
+      
     </div>
   </main>
 
