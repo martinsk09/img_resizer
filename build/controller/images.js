@@ -7,7 +7,7 @@ var path_1 = __importDefault(require("path"));
 var fs = require('fs');
 exports.displayThumb = function (req, res) {
     var imageFullName = req.query.filename;
-    var imageName = imageFullName.slice(0, -5);
+    var imageName = imageFullName;
     var directoryPath = path_1.default.join(__dirname, '../../assets/images/thumb/');
     //passsing directoryPath and callback function
     fs.readdir(directoryPath, function (err, files) {
@@ -20,7 +20,7 @@ exports.displayThumb = function (req, res) {
             // Do whatever you want to do with the file
             if (image.startsWith(imageName)) {
                 //console.log('Found2 ' +image); 
-                res.sendFile(path_1.default.join(__dirname, '../../assets/images/thumb/' + imageFullName));
+                res.sendFile(path_1.default.join(__dirname, '../../assets/images/thumb/' + image));
             }
         });
     });

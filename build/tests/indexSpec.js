@@ -43,7 +43,7 @@ var supertest_1 = __importDefault(require("supertest"));
 var index_1 = __importDefault(require("../index"));
 var request = (0, supertest_1.default)(index_1.default);
 describe('Test endpoint responses', function () {
-    it('gets the landing api endpoint', function (done) { return __awaiter(void 0, void 0, void 0, function () {
+    it('gets the landing api endpoint', function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -51,29 +51,13 @@ describe('Test endpoint responses', function () {
                 case 1:
                     response = _a.sent();
                     expect(response.status).toBe(200);
-                    done();
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-});
-describe('Test to validate images are being resized and rendered', function () {
-    it('gets the resize api endpoint when the width and height is not defined', function (done) { return __awaiter(void 0, void 0, void 0, function () {
-        var response;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/api/resize?file=IMG_5194.jpg&width=undefined&height=undefined')];
-                case 1:
-                    response = _a.sent();
-                    expect(response.status).toBe(200);
-                    done();
                     return [2 /*return*/];
             }
         });
     }); });
 });
 describe('Test to validate images are being resized and rendered with the right response', function () {
-    it('gets the resize api endpoint with image rendered', function (done) { return __awaiter(void 0, void 0, void 0, function () {
+    it('gets the resize api endpoint with image rendered', function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -81,14 +65,13 @@ describe('Test to validate images are being resized and rendered with the right 
                 case 1:
                     response = _a.sent();
                     expect(response.status).toBe(200);
-                    done();
                     return [2 /*return*/];
             }
         });
     }); });
 });
 describe('Test endpoint responses for image placeholder on src', function () {
-    it('gets the resize api endpoint with image rendered', function (done) { return __awaiter(void 0, void 0, void 0, function () {
+    it('gets the resize api endpoint with image rendered', function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -96,7 +79,6 @@ describe('Test endpoint responses for image placeholder on src', function () {
                 case 1:
                     response = _a.sent();
                     expect(response.status).toBe(200);
-                    done();
                     return [2 /*return*/];
             }
         });
