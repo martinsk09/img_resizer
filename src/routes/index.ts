@@ -1,6 +1,7 @@
 import express from 'express';
 import upload from './api/upload';
 import resize from './api/resize';
+import test_resize from './api/test_resize';
 import images from './api/images';
 const home = require('../controller/home');
 
@@ -11,6 +12,7 @@ res.send('Api for resizing images. Example: http://localhost:3000/api/resize?fil
 });
 routes.use('/upload', upload);
 routes.use('/resize', resize);
+routes.use('/resize/test', test_resize);
 routes.use('/images', images);
 
 export default routes;

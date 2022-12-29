@@ -33,6 +33,15 @@ describe('Test endpoint responses for image placeholder on src', () => {
       '/api/images?filename=IMG_5194-250-250.jpeg&width=200&height=200'
     );
     expect(response.status).toBe(200);
-    // done();
   });
+
 });
+  describe('Test endpoint for image processing', () => {
+    it('delete image and resize with this api endpoint with image rendered', async () => {
+      const response = await request.get(
+        '/api/resize/test?file=image_resizer.png&width=400&height=300'
+      );
+      expect(response.status).toBe(200);
+      // done(); 
+    });
+  });

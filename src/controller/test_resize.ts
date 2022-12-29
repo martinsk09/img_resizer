@@ -1,10 +1,10 @@
+const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs');
-const sharp = require('sharp');
 import InputValidation from "../services/inputvalidation";
 import ImageHandler from "../services/imagehandler";
 
-exports.image_resize = (
+exports.test_image_resize = (
   req: {
     query: { file: string; width: string; height: string };
     baseUrl: string;
@@ -41,7 +41,7 @@ exports.image_resize = (
       width,
       height
     );
-    let thumbStatus = InputValidation.thumbCheck(
+    let thumbStatus = InputValidation.testThumbCreation(
       imageFullName,
       imageName,
       imageName,
@@ -66,4 +66,3 @@ exports.image_resize = (
     }
   }
 };
-
