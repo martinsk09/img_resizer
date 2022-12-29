@@ -34,14 +34,13 @@ describe('Test endpoint responses for image placeholder on src', () => {
     );
     expect(response.status).toBe(200);
   });
-
 });
-  describe('Test endpoint for image processing', () => {
-    it('delete image and resize with this api endpoint with image rendered', async () => {
-      const response = await request.get(
-        '/api/resize/test?file=image_resizer.png&width=400&height=300'
-      );
-      expect(response.status).toBe(200);
-      // done(); 
-    });
+describe('Test endpoint for image processing', () => {
+  it('delete image and resize with this api endpoint with image rendered', async () => {
+    const response = await request.get(
+      '/api/resize/test?file=image_resizer.png&width=400&height=300'
+    );
+    expect(response.status).toBe(200);
+    // done();
   });
+});

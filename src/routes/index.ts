@@ -7,8 +7,10 @@ const home = require('../controller/home');
 
 const routes = express.Router();
 
-routes.get('/', (req,res)=>{
-res.send('Api for resizing images. Example: http://localhost:3000/api/resize?file=IMG_5281.jpg&width=450&height=550')
+routes.get('/', (req, res) => {
+  res.send(
+    'Api for resizing images. Example: http://localhost:3000/api/resize?file=IMG_5281.jpg&width=450&height=550'
+  );
 });
 routes.use('/upload', upload);
 routes.use('/resize', resize);

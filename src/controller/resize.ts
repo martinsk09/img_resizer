@@ -1,8 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 const sharp = require('sharp');
-import InputValidation from "../services/inputvalidation";
-import ImageHandler from "../services/imagehandler";
+import InputValidation from '../services/inputvalidation';
+import ImageHandler from '../services/imagehandler';
 
 exports.image_resize = (
   req: {
@@ -66,4 +66,3 @@ exports.image_resize = (
     }
   }
 };
-

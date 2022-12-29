@@ -1,8 +1,8 @@
 const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs');
-import InputValidation from "../services/inputvalidation";
-import ImageHandler from "../services/imagehandler";
+import InputValidation from '../services/inputvalidation';
+import ImageHandler from '../services/imagehandler';
 
 exports.test_image_resize = (
   req: {
