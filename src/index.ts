@@ -1,10 +1,11 @@
 import express from 'express';
 import routes from './routes/index';
+import home from './routes/home';
 
 const app = express();
 const port = 3000;
 
-app.get('/', routes); //provides access to the landing page
+app.get('/', home); //provides access to the landing page
 app.use('/api', routes);
 
 app.use(express.static('assets/images/thumb'));

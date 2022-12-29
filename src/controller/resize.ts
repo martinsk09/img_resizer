@@ -14,26 +14,42 @@ exports.image_resize = (
   }
 ) => {
   /*Validations before proceeding
-  *Check the width and height values
-  *Check the file existence
-  */
-  let height:number;
-  let width:number;
+   *Check the width and height values
+   *Check the file existence
+   */
+  let height: number;
+  let width: number;
   const imageFullName = req.query.file;
   let imageName = imageFullName.slice(0, -4);
-  if(typeof InputValidation.heightCheck(req.query.height) != 'number'){
-    res.send('You have entered a wrong value in the height. Please enter a number greater than 0!');
-  }else if(typeof InputValidation.widthCheck(req.query.width) != 'number'){
-    res.send('You have entered a wrong value in the width. Please enter a number greater than 0!');
-  }else{
+  if (typeof InputValidation.heightCheck(req.query.height) != 'number') {
+    res.send(
+      'You have entered a wrong value in the height. Please enter a number greater than 0!'
+    );
+  } else if (typeof InputValidation.widthCheck(req.query.width) != 'number') {
+    res.send(
+      'You have entered a wrong value in the width. Please enter a number greater than 0!'
+    );
+  } else {
     width = parseInt(req.query.width);
     height = parseInt(req.query.height);
-    let fileStatus =InputValidation.fileCheck(imageFullName,imageName,imageName,width,height);
-    let thumbStatus =InputValidation.thumbCheck(imageFullName,imageName,imageName,width,height);
-    if(fileStatus.startsWith('Error')){
+    let fileStatus = InputValidation.fileCheck(
+      imageFullName,
+      imageName,
+      imageName,
+      width,
+      height
+    );
+    let thumbStatus = InputValidation.thumbCheck(
+      imageFullName,
+      imageName,
+      imageName,
+      width,
+      height
+    );
+    if (fileStatus.startsWith('Error')) {
       res.send(fileStatus);
     }
-    if(thumbStatus.startsWith('Processing')){
+    if (thumbStatus.startsWith('Processing')) {
       console.log(thumbStatus);
 
       resizeImage(
@@ -43,61 +59,79 @@ exports.image_resize = (
         height,
         res
       );
-    }else{
-
-      showThumb(res, imageFullName.slice(0, -4), width, height)
+    } else {
+      showThumb(res, imageFullName.slice(0, -4), width, height);
     }
-  };
-
+  }
 };
 
-class InputValidation{
-  
-  static widthCheck(width:string): string | number {
-
-    if (/[a-zA-Z]/.test(width) || width == undefined || width == null || width == ''  || parseInt(width) <= 0){
-      
+class InputValidation {
+  static widthCheck(width: string): string | number {
+    if (
+      /[a-zA-Z]/.test(width) ||
+      width == undefined ||
+      width == null ||
+      width == '' ||
+      parseInt(width) <= 0
+    ) {
       return 'err';
-
-    }else{
+    } else {
       return parseInt(width);
     }
   }
 
-  static heightCheck(height:string): string | number {
-
+  static heightCheck(height: string): string | number {
     //let numberCheck = ~~(height);
-    if (/[a-zA-Z]/.test(height) || height == undefined || height == null || height == ''  || parseInt(height) <= 0){
-
+    if (
+      /[a-zA-Z]/.test(height) ||
+      height == undefined ||
+      height == null ||
+      height == '' ||
+      parseInt(height) <= 0
+    ) {
       return 'err';
-
-    }else{
+    } else {
       return parseInt(height);
     }
   }
 
-  static fileCheck(imageFullName: string,imageName: string,file: string | String,width: number,height: number):string{
-
+  static fileCheck(
+    imageFullName: string,
+    imageName: string,
+    file: string | String,
+    width: number,
+    height: number
+  ): string {
     if (
       !fs.existsSync(
         path.join(__dirname, '../../assets/images/full/' + imageFullName)
       )
     ) {
       return 'Error. The file does not exist on the server. Please try again.';
-    }  else {
+    } else {
       console.log('Found Image' + imageName);
       return 'Found File';
     }
   }
-  
-  
-  static thumbCheck(imageFullName: string,imageName: string,file: string | String,width: number,height: number):string{
 
+  static thumbCheck(
+    imageFullName: string,
+    imageName: string,
+    file: string | String,
+    width: number,
+    height: number
+  ): string {
     if (
       !fs.existsSync(
         path.join(
           __dirname,
-          '../../assets/images/thumb/' + imageName + '-'+width+'-'+height+'.jpeg'
+          '../../assets/images/thumb/' +
+            imageName +
+            '-' +
+            width +
+            '-' +
+            height +
+            '.jpeg'
         )
       )
     ) {
@@ -107,8 +141,6 @@ class InputValidation{
       return 'renderThumb';
     }
   }
-
-
 }
 
 function showThumb(
@@ -122,7 +154,13 @@ function showThumb(
   res.sendFile(
     path.join(
       __dirname,
-      '../../assets/images/thumb/' + imageName + '-'+width+'-'+height+'.jpeg'
+      '../../assets/images/thumb/' +
+        imageName +
+        '-' +
+        width +
+        '-' +
+        height +
+        '.jpeg'
     )
   );
 }
@@ -149,7 +187,11 @@ async function resizeImage(
           __dirname,
           '../../assets/images/thumb/' +
             file.slice(0, -4) +
-            '-'+width+'-'+height+'.jpeg'
+            '-' +
+            width +
+            '-' +
+            height +
+            '.jpeg'
         )
       );
     //.toFile(path.join(__dirname, '../../assets/images/thumb/'+file.slice(0, -4)+"-resized-compressed.jpeg"));

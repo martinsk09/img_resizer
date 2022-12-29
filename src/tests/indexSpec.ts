@@ -30,7 +30,7 @@ describe('Test to validate images are being resized in a new file and rendered w
 describe('Test endpoint responses for image placeholder on src', () => {
   it('gets the resize api endpoint with image rendered', async () => {
     const response = await request.get(
-      '/api/images?filename=IMG_5194-resized-compressed.jpeg&width=200&height=200'
+      '/api/images?filename=IMG_5194-250-250.jpeg&width=200&height=200'
     );
     expect(response.status).toBe(200);
     // done();
