@@ -18,6 +18,15 @@ describe('Test to validate images are being resized and rendered with the right 
     //done();
   });
 });
+describe('Test to validate images are being resized in a new file and rendered with the right response', () => {
+  it('gets the resize api endpoint with image created and rendered', async () => {
+    const response = await request.get(
+      '/api/resize?file=IMG_5194.jpg&width=250&height=250'
+    );
+    expect(response.status).toBe(200);
+    //done();
+  });
+});
 describe('Test endpoint responses for image placeholder on src', () => {
   it('gets the resize api endpoint with image rendered', async () => {
     const response = await request.get(

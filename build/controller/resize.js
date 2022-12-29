@@ -39,38 +39,81 @@ var sharp = require('sharp');
 var path = require('path');
 var fs = require('fs');
 exports.image_resize = function (req, res) {
-    var width;
+    /*Validations before proceeding
+    *Check the width and height values
+    *Check the file existence
+    */
     var height;
-    if (req.query.width == undefined || req.query.width == null) {
-        width = 200;
+    var width;
+    var imageFullName = req.query.file;
+    var imageName = imageFullName.slice(0, -4);
+    if (typeof InputValidation.heightCheck(req.query.height) != 'number') {
+        res.send('You have entered a wrong value in the height. Please enter a number greater than 0!');
+    }
+    else if (typeof InputValidation.widthCheck(req.query.width) != 'number') {
+        res.send('You have entered a wrong value in the width. Please enter a number greater than 0!');
     }
     else {
         width = parseInt(req.query.width);
-    }
-    if (req.query.height == undefined || req.query.height == null) {
-        height = 200;
-    }
-    else {
         height = parseInt(req.query.height);
+        var fileStatus = InputValidation.fileCheck(imageFullName, imageName, imageName, width, height);
+        var thumbStatus = InputValidation.thumbCheck(imageFullName, imageName, imageName, width, height);
+        if (fileStatus.startsWith('Error')) {
+            res.send(fileStatus);
+        }
+        if (thumbStatus.startsWith('Processing')) {
+            console.log(thumbStatus);
+            resizeImage(path.join(__dirname, '../../assets/images/full/' + imageFullName), imageFullName, width, height, res);
+        }
+        else {
+            showThumb(res, imageFullName.slice(0, -4), width, height);
+        }
     }
-    var imageFullName = req.query.file;
-    var imageName = imageFullName.slice(0, -4);
-    if (!fs.existsSync(path.join(__dirname, '../../assets/images/full/' + imageFullName))) {
-        res.send('The file does not exist on the server. Please try again.');
-    }
-    else if (!fs.existsSync(path.join(__dirname, '../../assets/images/thumb/' + imageName + '-resized-compressed.jpeg'))) {
-        resizeImage(path.join(__dirname, '../../assets/images/full/' + req.query.file), req.query.file, width, height, res);
-        //return showThumb(res,imageName,width,height);
-    }
-    else {
-        console.log('Found ' + imageName);
-        resizeImage(path.join(__dirname, '../../assets/images/full/' + req.query.file), req.query.file, width, height, res);
-        //return showThumb(res, imageName, width, height);
-    }
+    ;
 };
+var InputValidation = /** @class */ (function () {
+    function InputValidation() {
+    }
+    InputValidation.widthCheck = function (width) {
+        if (/[a-zA-Z]/.test(width) || width == undefined || width == null || width == '' || parseInt(width) <= 0) {
+            return 'err';
+        }
+        else {
+            return parseInt(width);
+        }
+    };
+    InputValidation.heightCheck = function (height) {
+        //let numberCheck = ~~(height);
+        if (/[a-zA-Z]/.test(height) || height == undefined || height == null || height == '' || parseInt(height) <= 0) {
+            return 'err';
+        }
+        else {
+            return parseInt(height);
+        }
+    };
+    InputValidation.fileCheck = function (imageFullName, imageName, file, width, height) {
+        if (!fs.existsSync(path.join(__dirname, '../../assets/images/full/' + imageFullName))) {
+            return 'Error. The file does not exist on the server. Please try again.';
+        }
+        else {
+            console.log('Found Image' + imageName);
+            return 'Found File';
+        }
+    };
+    InputValidation.thumbCheck = function (imageFullName, imageName, file, width, height) {
+        if (!fs.existsSync(path.join(__dirname, '../../assets/images/thumb/' + imageName + '-' + width + '-' + height + '.jpeg'))) {
+            return 'Processing. The file does not exist on the server. The thumb is being created.';
+        }
+        else {
+            console.log('Found Thumb' + imageName);
+            return 'renderThumb';
+        }
+    };
+    return InputValidation;
+}());
 function showThumb(res, imageName, width, height) {
-    console.log('see ' + imageName);
-    res.sendFile(path.join(__dirname, '../../assets/images/thumb/' + imageName + '-resized-compressed.jpeg'));
+    //console.log('see ' + imageName);
+    res.sendFile(path.join(__dirname, '../../assets/images/thumb/' + imageName + '-' + width + '-' + height + '.jpeg'));
 }
 //This is used to process the image
 function resizeImage(fileAd, file, width, height, res) {
@@ -90,11 +133,11 @@ function resizeImage(fileAd, file, width, height, res) {
                             .toFormat('jpeg', { mozjpeg: true })
                             .toFile(path.join(__dirname, '../../assets/images/thumb/' +
                             file.slice(0, -4) +
-                            '-resized-compressed.jpeg'))];
+                            '-' + width + '-' + height + '.jpeg'))];
                 case 1:
                     _a.sent();
                     //.toFile(path.join(__dirname, '../../assets/images/thumb/'+file.slice(0, -4)+"-resized-compressed.jpeg"));
-                    console.log('File2 ' + file);
+                    //console.log('File2 ' + file);
                     return [2 /*return*/, showThumb(res, file.slice(0, -4), width, height)];
                 case 2:
                     error_1 = _a.sent();
