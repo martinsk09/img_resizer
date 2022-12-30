@@ -3,7 +3,7 @@ import routes from './routes/index';
 import home from './routes/home';
 
 const app = express();
-const port = 3000;
+const port = 8500;
 
 app.get('/', home); //provides access to the landing page
 app.use('/api', routes);

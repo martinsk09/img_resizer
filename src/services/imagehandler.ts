@@ -8,11 +8,11 @@ export class ImageHandler {
     fileAd: string,
     file: String,
     width: number,
-    height: number,
-    res: { sendFile: (arg0: string) => void; redirect: (x: string) => void }
-  ) {
+    height: number
+  ): Promise<'Processed. Image was resized successfully' | unknown> {
+    let status;
     try {
-      await sharp(fileAd)
+      status = await sharp(fileAd)
         //.toBuffer()
         .resize({
           width: width,
@@ -33,35 +33,16 @@ export class ImageHandler {
           )
         );
       //.toFile(path.join(__dirname, '../../assets/images/thumb/'+file.slice(0, -4)+"-resized-compressed.jpeg"));
-      //console.log('File2 ' + file);
+      console.log(
+        'Processed. Image was resized successfully ' + JSON.stringify(status)
+      );
 
-      return this.showThumb(res, file.slice(0, -4), width, height);
+      return 'Processed';
     } catch (error) {
       console.log('File ' + JSON.stringify(file));
       console.log(error);
+      return error;
     }
-  }
-
-  public static showThumb(
-    res: { sendFile: (arg0: string) => void; redirect: (x: string) => void },
-    imageName: string,
-    width: number,
-    height: number
-  ) {
-    //console.log('see ' + imageName);
-
-    res.sendFile(
-      path.join(
-        __dirname,
-        '../../assets/images/thumb/' +
-          imageName +
-          '-' +
-          width +
-          '-' +
-          height +
-          '.jpeg'
-      )
-    );
   }
 }
 export default ImageHandler;

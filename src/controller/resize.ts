@@ -3,6 +3,7 @@ const fs = require('fs');
 const sharp = require('sharp');
 import InputValidation from '../services/inputvalidation';
 import ImageHandler from '../services/imagehandler';
+import RenderImage from '../services/renderimage';
 
 exports.image_resize = (
   req: {
@@ -41,7 +42,7 @@ exports.image_resize = (
       width,
       height
     );
-    let thumbStatus = InputValidation.thumbCheck(
+    let thumbCheckStatus = InputValidation.thumbCheck(
       imageFullName,
       imageName,
       imageName,
@@ -51,18 +52,20 @@ exports.image_resize = (
     if (fileStatus.startsWith('Error')) {
       res.send(fileStatus);
     }
-    if (thumbStatus.startsWith('Processing')) {
-      console.log(thumbStatus);
+    if (thumbCheckStatus.startsWith('Processing')) {
+      console.log(thumbCheckStatus);
 
-      ImageHandler.resizeImage(
+      let thumbProcessStatus = ImageHandler.resizeImage(
         path.join(__dirname, '../../assets/images/full/' + imageFullName),
         imageFullName,
         width,
-        height,
-        res
+        height
       );
+      if (thumbProcessStatus.finally() != undefined) {
+        RenderImage.showThumb(res, imageFullName.slice(0, -4), width, height);
+      }
     } else {
-      ImageHandler.showThumb(res, imageFullName.slice(0, -4), width, height);
+      RenderImage.showThumb(res, imageFullName.slice(0, -4), width, height);
     }
   }
 };

@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 import InputValidation from '../services/inputvalidation';
 import ImageHandler from '../services/imagehandler';
+import RenderImage from '../services/renderimage';
 
 exports.test_image_resize = (
   req: {
@@ -54,15 +55,25 @@ exports.test_image_resize = (
     if (thumbStatus.startsWith('Processing')) {
       console.log(thumbStatus);
 
-      ImageHandler.resizeImage(
-        path.join(__dirname, '../../assets/images/full/' + imageFullName),
-        imageFullName,
-        width,
-        height,
-        res
-      );
+      processImage().then(function (data) {
+        if (data == 'Processed') {
+          RenderImage.showThumb(res, imageFullName.slice(0, -4), width, height);
+        } else {
+          res.send('Image was not processed successfully');
+        }
+      });
     } else {
-      ImageHandler.showThumb(res, imageFullName.slice(0, -4), width, height);
+      RenderImage.showThumb(res, imageFullName.slice(0, -4), width, height);
     }
+  }
+  async function processImage() {
+    let thumbProcessStatus = await ImageHandler.resizeImage(
+      path.join(__dirname, '../../assets/images/full/' + imageFullName),
+      imageFullName,
+      width,
+      height
+    );
+    console.log('cc ' + thumbProcessStatus);
+    return thumbProcessStatus;
   }
 };
