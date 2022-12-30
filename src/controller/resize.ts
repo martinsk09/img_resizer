@@ -1,6 +1,4 @@
 const path = require('path');
-const fs = require('fs');
-const sharp = require('sharp');
 import InputValidation from '../services/inputvalidation';
 import ImageHandler from '../services/imagehandler';
 import RenderImage from '../services/renderimage';
@@ -35,20 +33,8 @@ exports.image_resize = (
   } else {
     width = parseInt(req.query.width);
     height = parseInt(req.query.height);
-    let fileStatus = InputValidation.fileCheck(
-      imageFullName,
-      imageName,
-      imageName,
-      width,
-      height
-    );
-    let thumbCheckStatus = InputValidation.thumbCheck(
-      imageFullName,
-      imageName,
-      imageName,
-      width,
-      height
-    );
+    let fileStatus = InputValidation.fileCheck(imageFullName, imageName);
+    let thumbCheckStatus = InputValidation.thumbCheck(imageName, width, height);
     if (fileStatus.startsWith('Error')) {
       res.send(fileStatus);
     }
@@ -56,7 +42,6 @@ exports.image_resize = (
       console.log(thumbCheckStatus);
 
       let thumbProcessStatus = ImageHandler.resizeImage(
-        path.join(__dirname, '../../assets/images/full/' + imageFullName),
         imageFullName,
         width,
         height

@@ -1,6 +1,4 @@
 const path = require('path');
-const fs = require('fs');
-const sharp = require('sharp');
 
 //This is used to process the image
 export class RenderImage {

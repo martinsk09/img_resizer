@@ -31,13 +31,7 @@ export class InputValidation {
     }
   }
 
-  public static fileCheck(
-    imageFullName: string,
-    imageName: string,
-    file: string | String,
-    width: number,
-    height: number
-  ): string {
+  public static fileCheck(imageFullName: string, imageName: string): string {
     if (
       !fs.existsSync(
         path.join(__dirname, '../../assets/images/full/' + imageFullName)
@@ -51,9 +45,7 @@ export class InputValidation {
   }
 
   public static thumbCheck(
-    imageFullName: string,
     imageName: string,
-    file: string | String,
     width: number,
     height: number
   ): string {
@@ -78,9 +70,7 @@ export class InputValidation {
     }
   }
   public static testThumbCreation(
-    imageFullName: string,
     imageName: string,
-    file: string | String,
     width: number,
     height: number
   ): string {

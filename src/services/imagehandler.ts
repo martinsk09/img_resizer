@@ -1,18 +1,18 @@
 const path = require('path');
-const fs = require('fs');
 const sharp = require('sharp');
 
 //This is used to process the image
 export class ImageHandler {
   public static async resizeImage(
-    fileAd: string,
     file: String,
     width: number,
     height: number
   ): Promise<'Processed. Image was resized successfully' | unknown> {
     let status;
     try {
-      status = await sharp(fileAd)
+      status = await sharp(
+        path.join(__dirname, '../../assets/images/full/' + file)
+      )
         //.toBuffer()
         .resize({
           width: width,
